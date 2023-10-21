@@ -28,7 +28,8 @@ export class AccountService {
           this.isAuthenticated$.next(true)      
           this.router.navigate(['/home'])
         },
-        error: (e:HttpErrorResponse)=>{this.snackBar.openSnackBar(e.error.message,"Dismiss");
+        error: (e:HttpErrorResponse)=>{
+        this.snackBar.openSnackBar(e.error.message ?? 'Unknown Error',"Dismiss");
         this.isAuthenticated$.next(false)},
         complete: ()=>{}
       });

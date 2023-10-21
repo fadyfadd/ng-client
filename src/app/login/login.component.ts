@@ -35,18 +35,6 @@ export class LoginComponent implements OnDestroy  {
 
   public authenticate() {
     this.accountService.authenticateUser(this.username.value , this.password.value)
-    /*
-    sessionStorage.setItem("ng-client-token" , "")
-    this.http.post<userDto>("http://localhost:5198/authenticate-user", {"UserName":`${this.username.value}` , "Password":`${this.password.value}`} , {
-      }).pipe(takeUntil(this.destorySubject)).subscribe({
-        next: (userDto:userDto)=>{
-          sessionStorage.setItem("ng-client-token" , userDto.token)       
-          this.router.navigate(['/home'])
-        },
-        error: (e:HttpErrorResponse)=>{this.snackBar.openSnackBar(e.error.message,"Dismiss");console.log(e)},
-        complete: ()=>{}
-      });
-      */
   }
   
 }
