@@ -10,10 +10,10 @@ import { SnackBarService } from './snack-bar.service';
 })
 export class AccountService {
 
-  private destorySubject :Subject<void> = new Subject();
+  public destorySubject :Subject<void> = new Subject();
 
   public isAuthenticated$:BehaviorSubject<boolean> = new BehaviorSubject(false);
-  private userName: string = "";
+  public userName: string = "";
 
   
   public authenticateUser(userName:string , password:string) {
@@ -32,6 +32,14 @@ export class AccountService {
         this.isAuthenticated$.next(false)},
         complete: ()=>{}
       });
+  }
+
+  public logout() {
+    this.userName = "";
+    sessionStorage.setItem("ng-client-token" , "")
+    this.userName = "";
+    this.router.navigate(['/login'])
+    this.isAuthenticated$.next(false)
   }
 
   ngOnDestroy(): void {

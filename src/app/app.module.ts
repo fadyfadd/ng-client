@@ -15,7 +15,8 @@ import { FilmsByActorComponent } from './films-by-actor/films-by-actor.component
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule} from '@angular/material/button';
 import { MatSnackBarModule} from '@angular/material/snack-bar'
-import {MatDividerModule} from '@angular/material/divider'
+import {MatDividerModule} from '@angular/material/divider';
+import { MenuComponent } from './menu/menu.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {MatDividerModule} from '@angular/material/divider'
     HomeComponent,
     LoginComponent,
     NotFoundPageComponent,
-    FilmsByActorComponent
+    FilmsByActorComponent,
+    MenuComponent
   ],
   imports: [
     MatDividerModule,

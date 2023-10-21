@@ -1,0 +1,13 @@
+a {
+    margin-left:2px;
+    margin-right:2px;
+}
+
+.separator {
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+.welcome {
+    font-weight: bold;
+}

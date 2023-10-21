@@ -1,0 +1,8 @@
+<div>
+<a [style.display]="(accountService.isAuthenticated$ | async) == true ? 'inline-block' : 'none'" [routerLink]="['/home']">Home</a>   
+<a [routerLink]="['/login']">Login</a>  
+<a [style.display]="(accountService.isAuthenticated$ | async) == true ? 'inline-block' : 'none'"  [routerLink]="['/films-by-actor']">Films by Actor</a>  
+<a [style.display]="(accountService.isAuthenticated$ | async) == true ? 'inline-block' : 'none'"  [routerLink]="[]" (click)="logout()">Logout</a>
+</div>
+<div class="welcome" *ngIf="accountService.userName">Welcome {{accountService.userName}}</div>
+<mat-divider class="separator"></mat-divider>
