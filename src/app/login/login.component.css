@@ -1,0 +1,12 @@
+.center-form {
+    position: absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+}
+
+.title {
+    text-align: center;
+    margin:10px;
+    font-weight: bold;
+    font-size: 18px;
+}
