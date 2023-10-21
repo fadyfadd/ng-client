@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { userDto } from '../data-transfer-objects/userDto';
 
 @Component({
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit  {
   }
 
   public authenticate() {
- 
+    sessionStorage.setItem("ng-client-token" , "")
     this.http.post<userDto>("http://localhost:5198/authenticate-user", {"UserName":"admin" , "Password":"admin"} , {
       }).subscribe({
         next: (userDto:userDto)=>{
