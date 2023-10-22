@@ -12,18 +12,20 @@ export class AccountService {
 
   public destorySubject :Subject<void> = new Subject();
 
-  public isAuthenticated$:BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public isAuthenticated$:Subject<boolean> = new Subject();
   public userName: string = "";
+  public sessionToken = ""
 
   
   public authenticateUser(userName:string , password:string) {
-    sessionStorage.setItem("ng-client-token" , "")
+    this.sessionToken = "";
     this.userName = "";
 
     this.http.post<userDto>("http://localhost:5198/authenticate-user", {"UserName":userName , "Password":password} , {
       }).pipe(takeUntil(this.destorySubject)).subscribe({
         next: (userDto:userDto)=>{
-          sessionStorage.setItem("ng-client-token" , userDto.token) 
+          
+          this.sessionToken = userDto.token;
           this.userName = userName;
           this.isAuthenticated$.next(true)      
           this.router.navigate(['/home'])
@@ -37,7 +39,7 @@ export class AccountService {
 
   public logout() {
     this.userName = "";
-    sessionStorage.setItem("ng-client-token" , "")
+    this.sessionToken = "";
     this.userName = "";
     this.router.navigate(['/login'])
     this.isAuthenticated$.next(false)

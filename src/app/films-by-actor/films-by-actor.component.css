@@ -1,0 +1,11 @@
+.title {
+    text-align: center;
+    margin:10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.separator {
+    margin-top:10px;
+    margin-bottom: 10px;
+}

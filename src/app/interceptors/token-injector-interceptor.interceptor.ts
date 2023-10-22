@@ -6,14 +6,16 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AccountService } from '../services/account.service';
 
 @Injectable()
 export class TokenInjectorInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private accountService:AccountService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let clientToken = sessionStorage.getItem("ng-client-token")
+    //let clientToken = sessionStorage.getItem("ng-client-token")
+    let clientToken = this.accountService.sessionToken;
     console.log("TokenInjectorInterceptor")
     request = request.clone(
       {
