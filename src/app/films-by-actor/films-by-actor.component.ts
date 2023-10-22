@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ActorDto } from '../data-transfer-objects/actorDto';
+import { ActorService } from '../services/actor-service.service';
 
 @Component({
   selector: 'app-films-by-actor',
@@ -9,18 +11,11 @@ import { Component } from '@angular/core';
 export class FilmsByActorComponent {
 
 
-  public constructor(private http:HttpClient) {
+  public constructor(private http:HttpClient , private actorService:ActorService) {
 
   }
 
-    public getFilmsByActor() {
-      this.http.get<object>("http://localhost:5198/sakila-movies-by-actor/1", {
-      }).subscribe({
-        next: (userDto:object)=>{
-          console.log(userDto)
-        },
-        error: (e)=>{console.log(e)},
-        complete: ()=>{}
-      });
-    }
+  public getFilmsByActor() {
+        this.actorService.getFilmsByActor();
+  }
 }
