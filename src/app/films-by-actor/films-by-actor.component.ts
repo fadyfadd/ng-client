@@ -24,7 +24,6 @@ export class FilmsByActorComponent implements AfterViewInit {
   
   public constructor(private actorService:ActorService) {
     this.dataSource = new MatTableDataSource(this.data);
-    this.getFilmsByActor();
   }
   
   ngAfterViewInit(): void {
@@ -41,15 +40,16 @@ export class FilmsByActorComponent implements AfterViewInit {
     }
   }
 
-  public getFilmsByActor() {
-        this.actorService.getFilmsByActor().subscribe({
+  public getFilmsByActor(element:HTMLInputElement) {
+   
+        this.actorService.getFilmsByActor(new Number((element.value)) as number).subscribe({
           next:(a)=>{
             if (a.length == 0) {
               this.dataSource = new MatTableDataSource(new Array<FilmDto>());
             }
             else {
-              console.log(a[0]);
               this.dataSource.data = a[0].filmsDto as Array<FilmDto>
+              console.log(this.dataSource.data) 
             }
           }
         })

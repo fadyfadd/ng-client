@@ -1,9 +1,16 @@
 <div class="title">Films By Actor</div>
-<button mat-raised-button color="primary"  (click)="getFilmsByActor()">Get Films</button>
-
- <mat-divider class="separator"></mat-divider>
+<div class="actor-form">
+ <form>
+  <mat-form-field appearance="outline">
+    <mat-label>Actor Id</mat-label>
+    <input matInput #actorId placeholder="Ex. Mia" />
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="getFilmsByActor(actorId)">Get Films</button>
+ </form>
+</div>
+<mat-divider class="separator"></mat-divider>
 <div>
-  <mat-form-field (keyup)="applyFilter($event)"  appearance="outline">
+  <mat-form-field (keyup)="applyFilter($event)">
     <mat-label>Filter</mat-label>
     <input matInput placeholder="Ex. Mia" #input />
   </mat-form-field>

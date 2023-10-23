@@ -13,17 +13,8 @@ export class ActorService {
 
   constructor(private http:HttpClient , private router:Router , private snackBar:SnackBarService) { }
 
-  public getFilmsByActor() : Observable<ActorDto[]> {
-    return this.http.get<ActorDto[]>("http://localhost:5198/sakila-movies-by-actor/1", {
+  public getFilmsByActor(actorId:number) : Observable<ActorDto[]> {
+    return this.http.get<ActorDto[]>("http://localhost:5198/sakila-movies-by-actor/" + actorId, {
     })
-    /*
-    .subscribe({
-      next: (actorDto:ActorDto[])=>{
-        console.log(actorDto)
-      },
-      error: (e)=>{console.log(e)},
-      complete: ()=>{}
-    });
-    */
   }
 }

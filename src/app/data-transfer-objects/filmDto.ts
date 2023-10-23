@@ -13,5 +13,5 @@ export class FilmDto {
     public rating?: number;
     public speacialFeatures? : string;
     public lastUpdate? : Date;
-    public actorsDtos? : Array<ActorDto>
+    public actorsDto? : Array<ActorDto>
 }
