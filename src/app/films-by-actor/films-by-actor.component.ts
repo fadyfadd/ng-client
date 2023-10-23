@@ -7,13 +7,17 @@ import { FilmDto } from '../data-transfer-objects/filmDto';
 import { Observable, map } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-
+import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, RequiredValidator } from '@angular/forms';
+import { RequiredValidtor, isNumericValidator } from '../validations';
+ 
 @Component({
   selector: 'app-films-by-actor',
   templateUrl: './films-by-actor.component.html',
   styleUrls: ['./films-by-actor.component.css']
 })
 export class FilmsByActorComponent implements AfterViewInit {
+
+  public loginForm:FormGroup<any>
 
   displayedColumns: string[] = ['filmId','title','description','releaseYear','length','rentalDuration' , 'action'];
   dataSource: MatTableDataSource<FilmDto>;
@@ -22,8 +26,16 @@ export class FilmsByActorComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
   
-  public constructor(private actorService:ActorService) {
+  public constructor(private actorService:ActorService , fb:FormBuilder) {
     this.dataSource = new MatTableDataSource(this.data);
+    this.loginForm = fb.group({
+        actorId: new FormControl('',[RequiredValidtor , isNumericValidator])
+        
+    }) 
+  }
+
+  get actorIdControl():AbstractControl {
+    return this.loginForm.get('actorId') as AbstractControl;
   }
   
   ngAfterViewInit(): void {
@@ -40,16 +52,19 @@ export class FilmsByActorComponent implements AfterViewInit {
     }
   }
 
-  public getFilmsByActor(element:HTMLInputElement) {
+  public onSubmit() {
+    this.getFilmsByActor(this.loginForm.get('actorId')?.value)
+  }
+
+  public getFilmsByActor(actorId:number) {
    
-        this.actorService.getFilmsByActor(new Number((element.value)) as number).subscribe({
+        this.actorService.getFilmsByActor(actorId).subscribe({
           next:(a)=>{
             if (a.length == 0) {
               this.dataSource = new MatTableDataSource(new Array<FilmDto>());
             }
             else {
               this.dataSource.data = a[0].filmsDto as Array<FilmDto>
-              console.log(this.dataSource.data) 
             }
           }
         })

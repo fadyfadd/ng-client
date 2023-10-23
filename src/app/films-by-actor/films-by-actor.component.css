@@ -18,3 +18,8 @@
 .actor-form {
     width:250px;
 }
+
+.error {
+  color: red;
+}
+

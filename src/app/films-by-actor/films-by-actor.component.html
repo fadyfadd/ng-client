@@ -1,18 +1,21 @@
 <div class="title">Films By Actor</div>
 <div class="actor-form">
- <form>
+ <form #form="ngForm" (submit)="onSubmit()" [formGroup]="loginForm">
   <mat-form-field appearance="outline">
     <mat-label>Actor Id</mat-label>
-    <input matInput #actorId placeholder="Ex. Mia" />
+    <input formControlName="actorId" matInput placeholder="Actor Id" />
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="getFilmsByActor(actorId)">Get Films</button>
+  <div class="error" *ngIf="actorIdControl.touched && actorIdControl.errors && actorIdControl.errors['isEmpty']!=null">{{actorIdControl.errors && actorIdControl.errors['isEmpty']}}</div>
+  <div class="error" *ngIf="actorIdControl.touched && actorIdControl.errors && actorIdControl.errors['isNotNumeric']!=null">{{actorIdControl.errors && actorIdControl.errors['isNotNumeric']}}</div>
+  <br>
+  <button [disabled]="!loginForm.valid" type="submit" mat-raised-button color="primary" >Get Films</button>
  </form>
 </div>
 <mat-divider class="separator"></mat-divider>
 <div>
   <mat-form-field (keyup)="applyFilter($event)">
     <mat-label>Filter</mat-label>
-    <input matInput placeholder="Ex. Mia" #input />
+    <input matInput placeholder="Filter" #input />
   </mat-form-field>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     <ng-container matColumnDef="action">

@@ -1,6 +1,6 @@
 <div>
 <a [style.display]="(accountService.isAuthenticated$ | async) == true ? 'inline-block' : 'none'" [routerLink]="['/home']">Home</a>   
-<a [routerLink]="['/login']">Login</a>  
+<a [style.display]="(accountService.isAuthenticated$ | async) == false ? 'inline-block' : 'none'" [routerLink]="['/login']">Login</a>  
 <a [style.display]="(accountService.isAuthenticated$ | async) == true ? 'inline-block' : 'none'"  [routerLink]="['/films-by-actor']">Films by Actor</a>  
 <a [style.display]="(accountService.isAuthenticated$ | async) == true ? 'inline-block' : 'none'"  [routerLink]="[]" (click)="logout()">Logout</a>
 </div>
